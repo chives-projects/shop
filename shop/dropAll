@@ -1,0 +1,6 @@
+DROP TABLE cancel;
+DROP TABLE orders;
+DROP TABLE goods;
+DROP TABLE purchase;
+DROP TABLE USER;
+DROP TABLE supplier;

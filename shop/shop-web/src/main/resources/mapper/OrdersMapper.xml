@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.shopweb.mapper.OrdersMapper">
+    <select id="findByWeek" resultType="com.shop.shopweb.interfaces.facade.dto.OrdersRevenueDto"
+            parameterType="String">
+        SELECT DATE_FORMAT(t.createdtime, '%Y-%m-%d') AS ct,
+        SUM(t.actualPayment) AS revenue FROM orders t WHERE 1=1
+        <if test="_parameter !=null and _parameter !=''">
+            and t.createdtime
+            BETWEEN DATE_SUB(#{key},INTERVAL 7 DAY) AND #{key}
+        </if>
+        GROUP BY ct order by ct
+    </select>
+</mapper>

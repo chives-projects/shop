@@ -1,0 +1,24 @@
+Hibernate: create table cancel (actualPayment float, amount integer, createdtime datetime, flag integer, reason varchar(255), sellPrice float, goodsId varchar(32) not null, ordersId varchar(32) not null, userId varchar(32), primary key (goodsId, ordersId)) engine=InnoDB
+Hibernate: create table goods (goodsId varchar(32) not null, alarmNum integer, goodsPrice float, name varchar(32), sellPrice float, stockNum integer, unit varchar(10), primary key (goodsId)) engine=InnoDB
+Hibernate: create table Orders (ordersId varchar(32) not null, actualPayment float, createdtime datetime, flag integer, userId varchar(32), primary key (ordersId)) engine=InnoDB
+Hibernate: create table ordersItem (amount integer, createdtime datetime, flag integer, sellPrice float, goodsId varchar(32) not null, ordersId varchar(32) not null, primary key (goodsId, ordersId)) engine=InnoDB
+Hibernate: create table purchase (id varchar(32) not null, createdtime datetime, flag integer, goodsPrice float, num integer, sellPrice float, goodsId varchar(32), supplierId varchar(32), userId varchar(32), primary key (id)) engine=InnoDB
+Hibernate: create table Supplier (supplierId varchar(32) not null, contactsName varchar(32), createdtime datetime, phone varchar(11), supplierName varchar(32), primary key (supplierId)) engine=InnoDB
+Hibernate: create table user (userId varchar(32) not null, address varchar(255), flag integer, name varchar(32), password varchar(32), role integer, sex integer, primary key (userId)) engine=InnoDB
+Hibernate: alter table cancel drop index UK_jj9avpqmk1n1lslxe5uapkju2
+Hibernate: alter table cancel add constraint UK_jj9avpqmk1n1lslxe5uapkju2 unique (goodsId)
+Hibernate: alter table ordersItem drop index UK_cvfx7rthm7j558g9debt95rqw
+Hibernate: alter table ordersItem add constraint UK_cvfx7rthm7j558g9debt95rqw unique (goodsId)
+Hibernate: alter table cancel add constraint FKi5rkvti9butxv0ipj9mi33smc foreign key (goodsId) references goods (goodsId)
+Hibernate: alter table cancel add constraint FKf7ewm0q2vb446kb6f8kkhk440 foreign key (ordersId) references Orders (ordersId)
+Hibernate: alter table cancel add constraint FKcm5ko4f1cnhsig52jvixt0xge foreign key (userId) references user (userId)
+Hibernate: alter table Orders add constraint FKa7brfxm4gqelu2od55inv5cjp foreign key (userId) references user (userId)
+Hibernate: alter table ordersItem add constraint FKbgrk42v3w055vhogsmfersxqf foreign key (goodsId) references goods (goodsId)
+Hibernate: alter table ordersItem add constraint FKrcxfaet15xbor2atk0b11woes foreign key (ordersId) references Orders (ordersId)
+Hibernate: alter table purchase add constraint FKhtgvuebtaj4yjr95ed3tefqnw foreign key (goodsId) references goods (goodsId)
+Hibernate: alter table purchase add constraint FK8yavswgldy4woclibniwnapos foreign key (supplierId) references Supplier (supplierId)
+Hibernate: alter table purchase add constraint FKhnwow8mrgrto6av1foauldrss foreign key (userId) references user (userId)
+
+Hibernate: insert into user (address, flag, name, password, role, sex, userId) values ('法国德国', '0', '陈', '1234', 0, 0, '123')
+Hibernate: insert into goods (alarmNum, goodsPrice, name, sellPrice, stockNum, unit, goodsId) values (2, 12.2, "dsaf", 11.2, 12, "asdf", "001")
+

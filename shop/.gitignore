@@ -1,0 +1,12 @@
+/logs/
+target/
+/*/target/
+classes/
+build/
+/*/build/
+
+# IDEA artifacts and output dirs
+*.iml
+*.ipr
+*.iws
+.idea
